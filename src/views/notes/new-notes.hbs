@@ -1,0 +1,34 @@
+<div class="col-md-4 mx-auto">
+  <div class="card-body">
+
+    <form action="/notes/add" method="POST">
+      <div class="form-control">
+        <h1 class="text-center">Create Note</h1>
+        <div class="form-group">
+          <label for="title">Title</label>
+          <input
+            type="text"
+            class="form-control border border-secondary "
+            id="title"
+            name="title"
+            placeholder="Write your title here"
+        
+          />
+        </div>
+
+        <div class="form-group mt-3" >
+          <label for="content">Content</label>
+          <textarea
+            class="form-control border border-secondary "
+            id="content"
+            name="description"
+            placeholder="Write your note here"
+          ></textarea>
+        </div>
+        <button class="btn btn-primary mt-3">Save</button>
+      </div>
+
+    </form>
+
+  </div>
+</div>

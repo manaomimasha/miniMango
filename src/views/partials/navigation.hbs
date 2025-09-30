@@ -1,0 +1,81 @@
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark shadow-sm py-2">
+  <div class="container">
+    <!-- Logo / Brand -->
+    <a class="navbar-brand fw-bold d-flex align-items-center" href="/">
+      <img
+        src="/mango.png"
+        alt="Mango"
+        class="img-fluid"
+        style="width: 30px; height: 30px;"
+      />
+      <i class="bi bi-journal-text me-2"></i>Mango
+    </a>
+
+    <!-- Botón responsive -->
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav"
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Links -->
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link text-light" href="/">
+            <i class="bi bi-house-door me-1"></i>
+            Home
+          </a>
+        </li>
+
+        {{#if user}}
+          <li class="nav-item">
+            <a class="nav-link text-light" href="/notes/add">
+              <i class="bi bi-pencil-square me-1"></i>
+              Add new Note
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-light" href="/notes/all-notes">
+              <i class="bi bi-pencil-square me-1"></i>
+              All Notes
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-light" href="/user/profile">
+              <i class="bi bi-people me-1"></i>
+              Profile
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-info" href="/user/logout">
+              <i class="bi bi-people me-1"></i>
+              Log out
+            </a>
+          </li>
+
+        {{else}}
+          <li class="nav-item">
+            <a class="nav-link text-info" href="/user/login">
+              <i class="bi bi-info-circle me-1"></i>
+              LogIn
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-info" href="/user/register">
+              <i class="bi bi-info-circle me-1"></i>
+              Register
+            </a>
+          </li>
+
+        {{/if}}
+      </ul>
+    </div>
+  </div>
+</nav>

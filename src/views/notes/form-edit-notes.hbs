@@ -1,0 +1,64 @@
+<div class="col-md-4 mx-auto">
+  <div class="card-body">
+
+    <div class="form-control">
+      <h1 class="text-center">Edit Note</h1>
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input
+          type="text"
+          class="form-control border border-secondary"
+          id="title"
+          name="title"
+          value="{{note.title}}"
+        />
+      </div>
+
+      <div class="form-group mt-3">
+        <label for="description">Content</label>
+        <textarea
+          class="form-control border border-secondary"
+          id="description"
+          name="description"
+          
+        >{{note.description}}</textarea>
+      </div>
+      <button
+        class="btn btn-success mt-3"
+        {{!-- onclick="oneditNote('{{note._id, note.title, note.description}} ')" --}}
+        onclick="oneditNote('{{note._id}}', '{{note.title}}', '{{note.description}}')"
+      >
+        <i class="fas fa-edit"></i>
+        Update Note
+      </button>
+    </div>
+
+    <div class="toast-container position-fixed top-0 end-0 p-3">
+      <div
+        id="notificationToastEdit"
+        class="toast bg-success text-white"
+        role="alert"
+      >
+        <div class="toast-body d-flex align-items-center">
+          <i class="fas fa-check-circle me-2"></i>
+          Nota editada
+        </div>
+      </div>
+    </div>
+
+    <div class="toast-container position-fixed top-0 end-0 p-3">
+      <div
+        id="notificationToast"
+        class="toast bg-success text-white"
+        role="alert"
+      >
+        <div class="toast-body d-flex align-items-center">
+          <i class="fas fa-check-circle me-2"></i>
+          Nota actualizada exitosamente
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>

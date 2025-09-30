@@ -1,0 +1,18 @@
+/* body {
+  background-color: rgb(140, 140, 140);
+  color: white;
+} */
+
+body {
+  background: linear-gradient(to right, #2c3442, #527646);
+}
+
+.bg-cards {
+  background: linear-gradient(to left, #2c3442, #527646);
+}
+
+.card-header {
+  border-top: 2px solid #6f7677 !important; /* border-info color */
+  background-color: rgba(108, 117, 125, 0.1);
+}
+
