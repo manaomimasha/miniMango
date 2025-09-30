@@ -29,8 +29,9 @@ Una aplicación web para gestionar notas con autenticación de usuarios.
 ## Variables de entorno
 
 ```env
-PORT=8000
-MONGO_URI=mongodb://localhost:27017/miniMango
+PORT=...
+MONGO_URI=...
+SESSION_SECRET=...
 ```
 
 ## Deploy
