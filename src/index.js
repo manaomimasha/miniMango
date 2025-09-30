@@ -1,4 +1,4 @@
-import { app } from "./server.js";
+import app  from "./server.js";
 import { db } from "./database.js";
 
 db.then(() => {

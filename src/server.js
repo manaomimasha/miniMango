@@ -20,7 +20,7 @@ import { dirname } from "path";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 // app.use("/api/user", userRoute);
-export const app = express();
+const app = express();
 
 //settings
 app.set("port", process.env.PORT || 4000);
@@ -84,3 +84,5 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(indexRouter);
 app.use(notesRouter);
 app.use(userRouter);
+
+export default app;
