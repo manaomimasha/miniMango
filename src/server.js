@@ -5,6 +5,7 @@ import morgan from "morgan";
 import methOverride from "method-override";
 import flash from "connect-flash";
 import session from "express-session";
+import MongoStore from "connect-mongo";
 import passport from "passport";
 import dotenv from "dotenv";
 dotenv.config();
@@ -47,10 +48,22 @@ app.use(morgan("dev"));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(methOverride("_method"));
-app.use(session({ 
-   secret: process.env.SESSION_SECRET,
-   resave: true,
-   saveUninitialized: true }));
+// app.use(session({
+//    secret: process.env.SESSION_SECRET,
+//    resave: true,
+//    saveUninitialized: true }));
+
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    store: MongoStore.create({
+      mongoUrl: process.env.MONGO_URI,
+    }),
+    resave: false,
+    saveUninitialized: false,
+  })
+);
+
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
@@ -60,7 +73,7 @@ app.use((req, res, next) => {
   res.locals.success_msg = req.flash("success_msg");
   res.locals.error_msg = req.flash("error_msg");
   res.locals.error = req.flash("error");
-  res.locals.user = req.user || null
+  res.locals.user = req.user || null;
   next();
 });
 
