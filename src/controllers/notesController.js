@@ -1,4 +1,5 @@
 import { Note } from "../models/Note.js";
+import { addNoteService } from "../services/notesServices.js";
 
 const renderNotes = async (req, res) => {
   const notes = await Note.find({ user: req.user.id });
@@ -10,19 +11,19 @@ const renderNotesForm = (req, res) => {
 };
 
 const createNewNote = async (req, res) => {
-  console.log(req.body);
-  const { title, description } = req.body;
-  //try comienza
-  //el req.body va al servicio:
-  const newNote = new Note({ title, description });
-  newNote.user = req.user.id;
-  await newNote.save();
-  //hasta aca va al servicio
-  //catch entra cuando algo m da mal en try
-
+   try{
+    await addNoteService(req.body, req.user.id);
   req.flash("success_msg", "Note created successfully");
-  //va dentro del try
   res.redirect("/notes/all-notes");
+  }
+  catch{(err)=>{
+    console.log(err)
+    req.flash("error_msg", "Something went wrong");
+    res.redirect("/notes/new-notes");
+  
+  }}
+  //el req.body va al servicio:
+
   //los errores se manejan adentro del catch
 };
 

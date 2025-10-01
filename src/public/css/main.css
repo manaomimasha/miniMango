@@ -16,3 +16,58 @@ body {
   background-color: rgba(108, 117, 125, 0.1);
 }
 
+/* Navegación responsive */
+.navbar-nav .nav-link {
+  font-size: 1.1rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  border-radius: 8px;
+  margin: 2px 0;
+}
+
+.navbar-nav .nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: translateX(5px);
+}
+
+.navbar-toggler {
+  padding: 0.5rem;
+  border: none;
+}
+
+.navbar-toggler:focus {
+  box-shadow: none;
+}
+
+/* En móvil, mostrar solo iconos */
+@media (max-width: 767px) {
+  .navbar-nav .nav-link {
+    padding: 0.75rem 1rem;
+    text-align: center;
+  }
+
+  .navbar-nav .nav-link i {
+    font-size: 1.3rem;
+  }
+}
+
+/* En tablet, mostrar iconos + texto */
+@media (min-width: 768px) and (max-width: 991px) {
+  .navbar-nav .nav-link {
+    padding: 0.5rem 0.75rem;
+  }
+}
+
+/* En pantallas pequeñas, agregar space-around al container-fluid */
+@media (max-width: 991px) {
+  .navbar .container-fluid {
+    justify-content: space-around !important;
+  }
+}
+
+/* O más específico para el navbar */
+@media (max-width: 991px) {
+  .navbar > .container-fluid {
+    justify-content: space-around !important;
+  }
+}

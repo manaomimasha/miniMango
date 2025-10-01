@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-sm navbar-dark bg-dark shadow-sm py-2">
+{{!-- <nav class="navbar navbar-expand-sm navbar-dark bg-dark shadow-sm py-2">
   <div class="container">
     <!-- Logo / Brand -->
     <a class="navbar-brand fw-bold d-flex align-items-center" href="/">
@@ -74,6 +74,87 @@
             </a>
           </li>
 
+        {{/if}}
+      </ul>
+    </div>
+  </div>
+</nav> --}}
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm py-3">
+  <div class="container-fluid">
+    <!-- Logo / Brand -->
+    <a class="navbar-brand fw-bold d-flex align-items-center fs-4" href="/">
+      <img
+        src="/mango.png"
+        alt="Mango"
+        class="img-fluid me-2"
+        style="width: 35px; height: 35px;"
+      />
+      <span class="d-none d-sm-inline">MiniMango</span>
+      <span class="d-inline d-sm-none">MM</span>
+    </a>
+
+    <!-- Botón responsive -->
+    {{! <button
+      class="navbar-toggler border-0"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav"
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    > }}
+    {{! <span class="navbar-toggler-icon"></span>
+    </button> }}
+
+    <!-- Links -->
+    <div class="" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link text-light py-2 px-3" href="/">
+            <i class="fas fa-home me-2"></i>
+            <span class="d-none d-md-inline">Home</span>
+          </a>
+        </li>
+
+        {{#if user}}
+          <li class="nav-item">
+            <a class="nav-link text-light py-2 px-3" href="/notes/add">
+              <i class="fas fa-plus me-2"></i>
+              <span class="d-none d-md-inline">Add Note</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-light py-2 px-3" href="/notes/all-notes">
+              <i class="fas fa-sticky-note me-2"></i>
+              <span class="d-none d-md-inline">All Notes</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-light py-2 px-3" href="/user/profile">
+              <i class="fas fa-user me-2"></i>
+              <span class="d-none d-md-inline">Profile</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-info py-2 px-3" href="/user/logout">
+              <i class="fas fa-sign-out-alt me-2"></i>
+              <span class="d-none d-md-inline">Logout</span>
+            </a>
+          </li>
+        {{else}}
+          <li class="nav-item">
+            <a class="nav-link text-info py-2 px-3" href="/user/login">
+              <i class="fas fa-sign-in-alt me-2"></i>
+              <span class="d-none d-md-inline">Login</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-info py-2 px-3" href="/user/register">
+              <i class="fas fa-user-plus me-2"></i>
+              <span class="d-none d-md-inline">Register</span>
+            </a>
+          </li>
         {{/if}}
       </ul>
     </div>
