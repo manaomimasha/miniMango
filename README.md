@@ -1,43 +1,56 @@
-{
-  "_id": "ObjectId",
-  "name": "String (requerido)",
-  "description": "String",
-  "user": "ObjectId (ref: User)",
-  "createdAt": "Date",
-  "updatedAt": "Date"
-}ongoDB con connect-mongo
-- **Middleware**: Verificación de tokens en rutas protegidas
-- **Validaciones**: En modelos y controladores
-- **CORS**: Habilitado para desarrollo
+🥭 MiniMango
+Aplicación web para crear, editar y organizar notas personales con autenticación JWT y categorías personalizadas.
 
----
+🚀 Stack
 
-## 🧪 Testing
+Backend: Node.js + Express.js
 
-```bash
-# Instalar dependencias de testing (opcional)
-npm install --save-dev jest supertest
+Base de datos: MongoDB
 
-# Ejecutar tests (cuando estén implementados)
-npm test
-```
+Frontend: Handlebars + Bootstrap 5
 
----
+Auth: JWT + bcrypt
 
-## 📄 Licencia
+Deploy: Vercel (serverless)
 
-ISC License
+⚙️ Variables de entorno (.env)
+PORT=4000
+MONGO_URI=...
+JWT_SECRET=clave_super_segura_min_32
+JWT_EXPIRES=7d
+SESSION_SECRET=otra_clave_unica
+NODE_ENV=development
 
----
+📦 Instalación rápida
+git clone https://github.com/tu-usuario/miniMango.git
+cd miniMango
+npm install
+cp .env.example .env
+npm run dev
 
-## 👤 Autor
+🗂️ Arquitectura
+src/
+├── config/ # Configuración JWT, DB
+├── controllers/ # Lógica de endpoints
+├── models/ # Esquemas Mongoose
+├── routes/ # Definición de rutas Express
+├── services/ # Lógica de negocio
+├── views/ # Templates Handlebars
+├── public/ # Archivos estáticos
+└── server.js # Configuración principal
 
-**masha tar**
+🔒 Seguridad
 
----
+Contraseñas encriptadas con bcrypt
 
-## 🚀 Deploy
+Autenticación con JWT (expiración configurable)
 
-Desplegado en **Vercel**: [https://tu-app.vercel.app](https://tu-app.vercel.app)
+Middleware isAuthenticated protege rutas privadas
 
----
+Sesiones almacenadas en MongoDB
+
+Build Command: npm install
+
+👤 Autor
+Masha Tarima
+🔗 Demo en Vercel: https://mini-mango-2-0.vercel.app/
