@@ -17,7 +17,9 @@ export const isAuthenticated = (req, res, next) => {
     // 2) verificar
     const payload = jwt.verify(token, JWT_CONFIG.secret);
     // 3) dejar usuario en req (mismo contrato que esperabas con Passport)
-    req.user = { id: payload.userId, email: payload.email };
+    // req.user = { id: payload.userId, email: payload.email };
+    // src/helpers/isAuthJWT.js (línea 20)
+req.user = { id: payload.userId, email: payload.email, name: payload.name };
     return next();
   } catch (e) {
     req.flash("error_msg", "Session expired or invalid token.");

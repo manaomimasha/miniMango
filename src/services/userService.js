@@ -6,7 +6,9 @@ import { JWT_CONFIG } from "../config/jwt.js";
 
 function signUserToken(user) {
   return jwt.sign(
-    { userId: user._id.toString(), email: user.email },
+    { userId: user._id.toString(),
+       email: user.email ,
+      name: user.name  },
     JWT_CONFIG.secret,
     { expiresIn: JWT_CONFIG.expiresIn }
   );

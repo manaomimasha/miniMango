@@ -6,7 +6,7 @@ export const JWT_CONFIG = {
   expiresIn: process.env.JWT_EXPIRES || "7d",
   cookie: {
     httpOnly: true,
-    sameSite: "strict",
+    sameSite: "lax",
     secure: process.env.NODE_ENV === "production",
     maxAge: 7 * 24 * 60 * 60 * 1000, // 7 días
     path: "/",

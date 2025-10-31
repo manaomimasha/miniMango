@@ -51,25 +51,6 @@ export const logout = (req, res) => {
   res.redirect("/");
 };
 
-// GET /user/login
-// export function renderLogIn(req, res) {
-//   res.render("users/login", {
-//     // title: "Iniciar sesión",
-//     // Si usás connect-flash:
-//     success_msg: req.flash?.("success_msg"),
-//     error_msg: req.flash?.("error_msg"),
-//   });
-// }
-
-// GET /user/register
-// export function renderRegister(req, res) {
-//   res.render("users/register", {
-//     // title: "Crear cuenta",
-//     success_msg: req.flash?.("success_msg"),
-//     error_msg: req.flash?.("error_msg"),
-//   });
-// }
-
 export function renderLogIn(req, res) {
   res.render("user/login", {
     // ← CAMBIAR AQUÍ
