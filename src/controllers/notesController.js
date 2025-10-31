@@ -116,10 +116,12 @@ export const editNote = async (req, res) => {
     const categories = await listCategoriesService(req.user.id);
 
     res.render("notes/form-edit-notes", { note, categories });
+    // res.redirect(302, "/notes/all-notes");
   } catch (err) {
     console.error(err);
     req.flash("error_msg", err.message || "Note not found");
-    res.redirect("/notes/all-notes");
+    // res.redirect("/notes/all-notes");
+    res.redirect(302, "/notes/all-notes");
   }
 };
 
@@ -128,11 +130,13 @@ export const updateNote = async (req, res) => {
   try {
     await updateNoteService(req.params.id, req.user.id, req.body);
     req.flash("success_msg", "Note edited successfully");
-    res.redirect("/notes/all-notes");
+    // res.redirect("/notes/all-notes");
+    res.redirect(302, "/notes/all-notes");
   } catch (err) {
     console.error(err);
     req.flash("error_msg", err.message || "Error updating note");
-    res.redirect("/notes/all-notes");
+    // res.redirect("/notes/all-notes");
+    res.redirect(302, "/notes/all-notes");
   }
 };
 
