@@ -21,7 +21,7 @@ export const logIn = async (req, res) => {
     const { token, user } = await loginUser(req.body);
     res.cookie(JWT_CONFIG.name, token, JWT_CONFIG.cookie);
     req.flash("success_msg", `Welcome ${user.name}!`);
-    return res.redirect("/notes/all-notes");
+    return res.redirect(302, "/notes/all-notes");
   } catch (err) {
     console.error("❌ Login error:", err);
     req.flash("error_msg", err.message || "Login error");
@@ -33,11 +33,13 @@ export const register = async (req, res) => {
   try {
     await registerUser(req.body);
     req.flash("success_msg", "Registration successful! You can now login.");
-    return res.redirect("/user/login");
+    return res.redirect(302, "/user/login");
+
+    // res.redirect(302, "user/login");
   } catch (error) {
     console.error("❌ Register error:", error);
     const { name, email } = req.body;
-    return res.render("user/register", {
+    return res.render(302, "user/register", {
       errors: [{ text: error.message }],
       name,
       email,
