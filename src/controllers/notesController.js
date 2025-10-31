@@ -96,7 +96,8 @@ export const createNewNote = async (req, res) => {
 
     await addNoteService(noteData, req.user.id);
     req.flash("success_msg", "Note created successfully");
-    res.redirect("/notes/all-notes");
+    // res.redirect("/notes/all-notes");
+    res.redirect(302, "/notes/all-notes");
   } catch (err) {
     console.error("❌ Error completo:", err);
     console.error("❌ Stack trace:", err.stack);

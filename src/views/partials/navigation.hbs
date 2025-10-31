@@ -1,16 +1,6 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm py-3">
+{{!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm py-3">
   <div class="container-fluid">
-    <!-- Logo / Brand -->
-    <a class="navbar-brand fw-bold d-flex align-items-center fs-4" href="/">
-      <img
-        src="/mango.png"
-        alt="Mango"
-        class="img-fluid me-2"
-        style="width: 35px; height: 35px;"
-      />
-      <span class="d-none d-sm-inline">MiniMango</span>
-      <span class="d-inline d-sm-none">MM</span>
-    </a>
+
     <!-- Links -->
     <div class="" id="navbarNav">
       <ul class="navbar-nav ms-auto">
@@ -23,19 +13,25 @@
 
         {{#if user}}
           <li class="nav-item">
-            <a class="nav-link text-light py-2 px-3" href="/notes/add">
+            <a class="nav-link text-light py-2 px-3 fs-7" href="/notes/add">
               <i class="fas fa-plus me-2"></i>
               <span class="d-none d-md-inline">Add Note</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-light py-2 px-3" href="/notes/all-notes">
+            <a
+              class="nav-link text-light py-2 px-3 fs-7"
+              href="/notes/all-notes"
+            >
               <i class="fas fa-sticky-note me-2"></i>
               <span class="d-none d-md-inline">All Notes</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-light py-2 px-3" href="/notes/new-category">
+            <a
+              class="nav-link text-light py-2 px-3 fs-7"
+              href="/notes/new-category"
+            >
               <i class="fas fa-user me-2"></i>
               <span class="d-none d-md-inline">New category</span>
             </a>
@@ -63,6 +59,80 @@
             <a class="nav-link text-info py-2 px-3" href="/user/register">
               <i class="fas fa-user-plus me-2"></i>
               <span class="d-none d-md-inline">Register</span>
+            </a>
+          </li>
+        {{/if}}
+      </ul>
+    </div>
+  </div>
+</nav> --}}
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm py-1">
+  <div class="container-fluid px-3">
+    <!-- Logo / Brand -->
+    <a class="navbar-brand fw-bold d-flex align-items-center fs-4" href="/">
+      <img
+        src="/mango.png"
+        alt="Mango"
+        class="img-fluid me-2"
+        style="width: 35px; height: 35px;"
+      />
+      <span class="d-none d-sm-inline">MiniMango</span>
+      <span class="d-inline d-sm-none">MM</span>
+    </a>
+
+    <!-- Links -->
+    <div id="navbarNav">
+      <ul class="navbar-nav ms-auto align-items-center small">
+        <li class="nav-item">
+          <a class="nav-link text-light px-2" href="/">
+            <i class="fas fa-home me-1"></i>
+            Home
+          </a>
+        </li>
+
+        {{#if user}}
+          <li class="nav-item">
+            <a class="nav-link text-light px-2" href="/notes/add">
+              <i class="fas fa-plus me-1"></i>
+              Add Note
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-light px-2" href="/notes/all-notes">
+              <i class="fas fa-sticky-note me-1"></i>
+              All Notes
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-light px-2" href="/notes/new-category">
+              <i class="fas fa-folder-plus me-1"></i>
+              Add Category
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-light px-2" href="/user/profile">
+              <i class="fas fa-user me-1"></i>
+              Profile
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-info px-2" href="/user/logout">
+              <i class="fas fa-sign-out-alt me-1"></i>
+              Logout
+            </a>
+          </li>
+        {{else}}
+          <li class="nav-item">
+            <a class="nav-link text-info px-2" href="/user/login">
+              <i class="fas fa-sign-in-alt me-1"></i>
+              Login
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-info px-2" href="/user/register">
+              <i class="fas fa-user-plus me-1"></i>
+              Register
             </a>
           </li>
         {{/if}}
