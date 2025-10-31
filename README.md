@@ -1,39 +1,43 @@
-# MiniMango - Notes App
+{
+  "_id": "ObjectId",
+  "name": "String (requerido)",
+  "description": "String",
+  "user": "ObjectId (ref: User)",
+  "createdAt": "Date",
+  "updatedAt": "Date"
+}ongoDB con connect-mongo
+- **Middleware**: Verificación de tokens en rutas protegidas
+- **Validaciones**: En modelos y controladores
+- **CORS**: Habilitado para desarrollo
 
-Una aplicación web para gestionar notas con autenticación de usuarios.
+---
 
-## Características
+## 🧪 Testing
 
-- ✅ Autenticación de usuarios con Passport.js
-- ✅ Gestión de notas (CRUD)
-- ✅ Base de datos MongoDB
-- ✅ Templates con Handlebars
-- ✅ Estilos con Bootstrap
+```bash
+# Instalar dependencias de testing (opcional)
+npm install --save-dev jest supertest
 
-## Tecnologías
-
-- Node.js
-- Express.js
-- MongoDB
-- Passport.js
-- Handlebars
-- Bootstrap
-
-## Instalación
-
-1. Clonar el repositorio
-2. Instalar dependencias: `npm install`
-3. Configurar variables de entorno
-4. Ejecutar: `npm start`
-
-## Variables de entorno
-
-```env
-PORT=...
-MONGO_URI=...
-SESSION_SECRET=...
+# Ejecutar tests (cuando estén implementados)
+npm test
 ```
 
-## Deploy
+---
 
-Desplegado en Vercel: [https://tu-app.vercel.app](https://tu-app.vercel.app)
+## 📄 Licencia
+
+ISC License
+
+---
+
+## 👤 Autor
+
+**masha tar**
+
+---
+
+## 🚀 Deploy
+
+Desplegado en **Vercel**: [https://tu-app.vercel.app](https://tu-app.vercel.app)
+
+---

@@ -1,34 +1,71 @@
-<div class="col-md-4 mx-auto">
-  <div class="card-body">
+<form action="/notes/add" method="POST">
+  <div class="form-control">
+    <h1 class="text-center">Create Note</h1>
 
-    <form action="/notes/add" method="POST">
-      <div class="form-control">
-        <h1 class="text-center">Create Note</h1>
-        <div class="form-group">
-          <label for="title">Title</label>
-          <input
-            type="text"
-            class="form-control border border-secondary "
-            id="title"
-            name="title"
-            placeholder="Write your title here"
-        
-          />
-        </div>
+    <div class="form-group">
+      <label for="title">Title</label>
+      <input
+        type="text"
+        class="form-control border border-secondary"
+        id="title"
+        name="title"
+        placeholder="Write your title here"
+        required
+      />
+    </div>
 
-        <div class="form-group mt-3" >
-          <label for="content">Content</label>
-          <textarea
-            class="form-control border border-secondary "
-            id="content"
-            name="description"
-            placeholder="Write your note here"
-          ></textarea>
-        </div>
-        <button class="btn btn-primary mt-3">Save</button>
+    <div class="form-group mt-3">
+      <label for="content">Content</label>
+      <textarea
+        class="form-control border border-secondary"
+        id="content"
+        name="description"
+        placeholder="Write your note here"
+        required
+      ></textarea>
+    </div>
+
+    <div class="form-group mt-3">
+      <label for="category">Category</label>
+
+      <!-- Selector de categorías existentes -->
+      <select
+        name="category"
+        id="categorySelect"
+        class="form-select text-light border border-info shadow-sm"
+        style="background-color: #495057;"
+      >
+        <option value="" disabled selected>
+          ▼ Select an existing category
+        </option>
+        {{#each categories}}
+          <option value="{{this.name}}">{{this.name}}</option>
+        {{/each}}
+      </select>
+    </div>
+
+    <div class="form-group mt-3">
+      <label for="newCategory">Or create a new category:</label>
+      <input
+        type="text"
+        class="form-control border border-secondary"
+        id="newCategory"
+        name="newCategory"
+        placeholder="Enter new category name"
+      />
+      <div class="form-text text-muted">
+        Leave blank if you selected one above
       </div>
+    </div>
 
-    </form>
-
+    <button class="btn btn-primary mt-3" type="submit">Save</button>
   </div>
-</div>
+</form>
+
+<script>
+  document.getElementById('categorySelect').addEventListener('change',
+  function() { if (this.value) { document.getElementById('newCategory').value =
+  ''; } }); document.getElementById('newCategory').addEventListener('input',
+  function() { if (this.value.trim()) {
+  document.getElementById('categorySelect').value = ''; } });
+</script>

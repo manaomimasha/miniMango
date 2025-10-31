@@ -6,20 +6,20 @@ import methOverride from "method-override";
 import flash from "connect-flash";
 import session from "express-session";
 import MongoStore from "connect-mongo";
-import passport from "passport";
-import dotenv from "dotenv";
-dotenv.config();
-//variables:
+import cookieParser from "cookie-parser";
+import jwt from "jsonwebtoken";
+import { JWT_CONFIG } from "./config/jwt.js";
+
+import { indexRouter } from "./routes/indexRoutes.js";
 import { notesRouter } from "./routes/notesRoutes.js";
 import { userRouter } from "./routes/userRoutes.js";
-import { indexRouter } from "./routes/indexRoutes.js";
-import "./config/passport.js";
+import { categoryRouter } from "./routes/categoryRoute.js";
+
 
 import { fileURLToPath } from "url";
 import { dirname } from "path";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-// app.use("/api/user", userRoute);
 const app = express();
 
 //settings
@@ -38,6 +38,9 @@ app.engine(
       allowProtoPropertiesByDefault: true,
       allowProtoMethodsByDefault: true,
     },
+    helpers: {
+      eq: (a, b) => a === b,
+    },
   })
 );
 
@@ -48,41 +51,56 @@ app.use(morgan("dev"));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(methOverride("_method"));
-// app.use(session({
-//    secret: process.env.SESSION_SECRET,
-//    resave: true,
-//    saveUninitialized: true }));
+
+app.use(cookieParser());
 
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
     store: MongoStore.create({
       mongoUrl: process.env.MONGO_URI,
+      ttl: 60,
     }),
     resave: false,
     saveUninitialized: false,
   })
 );
 
-app.use(passport.initialize());
-app.use(passport.session());
 app.use(flash());
 
-//Global variables
 app.use((req, res, next) => {
   res.locals.success_msg = req.flash("success_msg");
   res.locals.error_msg = req.flash("error_msg");
   res.locals.error = req.flash("error");
-  res.locals.user = req.user || null;
+
+  const token = req.cookies?.[JWT_CONFIG.name];
+  if (token) {
+    try {
+      const decoded = jwt.verify(token, JWT_CONFIG.secret);
+
+      res.locals.user = {
+        id: decoded.userId,
+        email: decoded.email,
+        name: decoded.name || "User",
+      };
+
+      req.user = res.locals.user; // útil para controladores
+    } catch (err) {
+      res.locals.user = null; // token vencido o inválido
+    }
+  } else {
+    res.locals.user = null; // sin token
+  }
+
   next();
 });
 
-//static files
 app.use(express.static(path.join(__dirname, "public")));
 
 //routes
 app.use(indexRouter);
 app.use(notesRouter);
 app.use(userRouter);
+app.use(categoryRouter)
 
 export default app;

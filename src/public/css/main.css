@@ -39,7 +39,6 @@ body {
   box-shadow: none;
 }
 
-/* En móvil, mostrar solo iconos */
 @media (max-width: 767px) {
   .navbar-nav .nav-link {
     padding: 0.75rem 1rem;
@@ -58,16 +57,101 @@ body {
   }
 }
 
-/* En pantallas pequeñas, agregar space-around al container-fluid */
 @media (max-width: 991px) {
   .navbar .container-fluid {
     justify-content: space-around !important;
   }
 }
 
-/* O más específico para el navbar */
 @media (max-width: 991px) {
   .navbar > .container-fluid {
     justify-content: space-around !important;
   }
+}
+
+:root {
+  --neon-soft: rgba(0, 255, 255, 0.15);
+  --neon-strong: #049ba0;
+  --snake-len-u: 50;
+  --stroke-w: 6;
+  --card-radius: 2px;
+  --anim-dur: 3200ms;
+}
+.card {
+  position: relative;
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.card:hover {
+  box-shadow: 0 0 5px var(--neon-soft), 0 0 10px var(--neon-soft);
+}
+
+.card .neon-snake {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.card:hover .neon-snake {
+  opacity: 1;
+}
+
+.card .neon-snake .border-line {
+  fill: none;
+  stroke: var(--neon-soft);
+  stroke-width: var(--stroke-w);
+}
+
+.card .neon-snake .border-line {
+  filter: drop-shadow(0 0 1px var(--neon-soft));
+}
+
+.card .neon-snake .runner {
+  fill: none;
+  stroke: var(--neon-strong);
+  stroke-width: var(--stroke-w);
+  stroke-dasharray: var(--snake-len-u) calc(1000 - var(--snake-len-u));
+
+  animation: snake-loop var(--anim-dur) linear infinite;
+}
+@keyframes snake-loop {
+  from {
+    stroke-dashoffset: 0;
+  }
+  to {
+    stroke-dashoffset: -1000;
+  }
+}
+
+/* Sospechosas: comentá o ajustá si existen */
+.badge {
+  background: transparent !important;
+} /* <- esto mata los bg- */
+/* .bg-*   { background: transparent !important; }  <- idem */
+
+.badge.bg-warning {
+  background-color: #ffc107 !important;
+  color: #111 !important;
+}
+.badge.bg-success {
+  background-color: #198754 !important;
+  color: #fff !important;
+}
+.badge.bg-info {
+  background-color: #0dcaf0 !important;
+  color: #111 !important;
+}
+.badge.bg-primary {
+  background-color: #0d6efd !important;
+  color: #fff !important;
+}
+.badge.bg-secondary {
+  background-color: #6c757d !important;
+  color: #fff !important;
 }

@@ -1,94 +1,102 @@
 <h1 class="text-light">All Notes List</h1>
-<div class="row text-light">
-  {{!-- {{notes}} --}}
-  {{#each notes}}
+<p class="text-muted">Notas totales: {{notesCount}}</p>
 
+{{#if notesCount}}
+  {{#each notes}}
     <div class="card bg-transparent text-light border-top border-info">
       <div class="card-header">
-        <h6 class="mb-0">Nota {{@index}}</h6>
+        <h6 class="mb-0">Note {{@index}}</h6>
       </div>
 
       <div class="card-body">
         <h5
           class="card-title text-info d-flex justify-content-between align-items-center"
           id="title"
-        >Título de la nota:
+        >Title of the note:
           {{this.title}}
           <a
-            {{!-- href="/notes/edit/{{this._id}}" --}}
-           {{!-- onclick="oneditNote('{{this._id}}')" --}}
             href="/notes/edit/{{this._id}}"
             class="text-white text-decoration-none"
           >
             <i class="fas fa-edit"></i>
-            Editar
+            Edit
           </a>
         </h5>
-      
-        <p class="card-text text-light"
-        id="description"
-        >Contenido de la nota:
+
+        <p class="card-text text-light" id="description">Content of the note:
           {{this.description}}</p>
 
-          <button class="btn btn-info" onclick="deleteNote('{{this._id}}')">
-            <i class="fas fa-trash"></i>
-           Delete Note
-          </button>
-      </div>
-      {{!-- <form action="/notes/delete/{{_id}}?_method=DELETE" method="POST">
-        <input type="hidden" name="_method" value="DELETE" />
-        <button class="btn btn-info" type="submit">
+        {{! <p text-info> }}
+        {{! Category:
+          <span
+            class="badge rounded-pill me-2"
+            style=" }}
+        {{!-- background-color: {{categoryColor}}; --}}
+        {{!-- background-color: {{categoryColor}} !important; 
+             color: {{categoryText}} !important;
+              border: 1px solid rgba(255,255,255,.15);"
+          > --}}
+        {{!-- {{category}} --}}
+        {{! </span></p> }}
+
+        {{!-- <span
+          class="badge rounded-pill me-2"
+          style="background-color: {{categoryColor}} !important; color: {{categoryText}} !important; border: 1px solid rgba(255,255,255,.15);"
+        >
+          {{displayCategory}}
+        </span> --}}
+        <p>Category: 
+ <span
+          class="badge rounded-pill me-2"
+          style="background-color: {{categoryColor}} !important; color: {{categoryText}} !important; border: 1px solid rgba(255,255,255,.15);"
+        >
+          {{this.category.name}}
+        </span>
+
+        </p>
+       
+
+        {{!-- <span
+          class="badge rounded-pill me-2"
+          style="background-color: {{categoryColor}} !important; color: {{categoryText}} !important; border: 1px solid rgba(255,255,255,.15);"
+        >
+          {{#if
+            category.name
+          }}{{category.name}}{{else}}{{displayCategory}}{{/if}}
+        </span> --}}
+
+        <button class="btn btn-info" onclick="deleteNote('{{this._id}}')">
           <i class="fas fa-trash"></i>
           Delete Note
         </button>
-      </form> --}}
-      {{!-- aca habria q poner un condicional si
-       la nota esta siendo editada que se renderice de otra forma , no? --}}
-       
+
+      </div>
+
+      <svg class="neon-snake">
+        <rect
+          class="border-line"
+          x="0"
+          y="0"
+          width="100%"
+          height="100%"
+          rx="12"
+          ry="12"
+          pathLength="1000"
+        />
+        <rect
+          class="runner"
+          x="0"
+          y="0"
+          width="100%"
+          height="100%"
+          rx="12"
+          ry="12"
+          pathLength="1000"
+        />
+      </svg>
 
     </div>
-
-
-      <div class="toast-container position-fixed top-0 end-0 p-3">
-        <div id="notificationToast" class="toast bg-success text-white" role="alert">
-          <div class="toast-body d-flex align-items-center">
-          <i class="fas fa-check-circle me-2"></i>
-          Nota eliminada
-          </div>
-        </div>
-      </div>
-
-    
-  
   {{/each}}
-
-  {{#each notes}}
-    <div
-      class="card mb-3 bg-cards important! border-light text-light border-secondary"
-    >
-      <div
-        class="card-header bg-transparent"
-        data-bs-toggle="collapse"
-        data-bs-target="#content-{{@index}}"
-        style="cursor: pointer;"
-      >
-        <div class="d-flex justify-content-between align-items-center">
-          <h6 class="mb-0">Nota {{@index}}</h6>
-          <span class="toggle-arrow">▼</span>
-        </div>
-      </div>
-      <div class="collapse show" id="content-{{@index}}">
-        <div class="card-body">
-          <h5 class="card-title">{{title}}</h5>
-          <p class="card-text">{{description}}</p>
-        </div>
-      </div>
-    </div>
-  {{/each}}
-
- 
-
-
-</div>
-</div>
-
+{{else}}
+  <p class="text-muted">No notes yet.</p>
+{{/if}}
