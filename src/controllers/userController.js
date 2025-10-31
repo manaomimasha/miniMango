@@ -1,4 +1,8 @@
-import { registerUser, loginUser, getUserProfile } from "../services/userService.js";
+import {
+  registerUser,
+  loginUser,
+  getUserProfile,
+} from "../services/userService.js";
 import { JWT_CONFIG } from "../config/jwt.js";
 
 export const renderProfile = async (req, res) => {
@@ -47,21 +51,37 @@ export const logout = (req, res) => {
   res.redirect("/");
 };
 
-
 // GET /user/login
+// export function renderLogIn(req, res) {
+//   res.render("users/login", {
+//     // title: "Iniciar sesión",
+//     // Si usás connect-flash:
+//     success_msg: req.flash?.("success_msg"),
+//     error_msg: req.flash?.("error_msg"),
+//   });
+// }
+
+// GET /user/register
+// export function renderRegister(req, res) {
+//   res.render("users/register", {
+//     // title: "Crear cuenta",
+//     success_msg: req.flash?.("success_msg"),
+//     error_msg: req.flash?.("error_msg"),
+//   });
+// }
+
 export function renderLogIn(req, res) {
-  res.render("users/login", {
-    // title: "Iniciar sesión",
-    // Si usás connect-flash:
+  res.render("user/login", {
+    // ← CAMBIAR AQUÍ
     success_msg: req.flash?.("success_msg"),
     error_msg: req.flash?.("error_msg"),
   });
 }
 
-// GET /user/register
+// Línea 63: Cambiar "users/register" a "user/register"
 export function renderRegister(req, res) {
-  res.render("users/register", {
-    // title: "Crear cuenta",
+  res.render("user/register", {
+    // ← CAMBIAR AQUÍ
     success_msg: req.flash?.("success_msg"),
     error_msg: req.flash?.("error_msg"),
   });
