@@ -80,7 +80,7 @@ export async function create(req, res) {
 
     if (isForm) {
       req.flash("success_msg", "Categoría creada correctamente");
-      return res.redirect("/notes/all-notes"); // 🔁 redirige al listado
+      return res.redirect(302, "/notes/all-notes"); // 🔁 redirige al listado
     }
 
     // Si vino desde Postman o fetch → devuelve JSON
@@ -134,7 +134,7 @@ export async function update(req, res) {
 
     if (isForm) {
       req.flash("error_msg", e.message);
-      return res.redirect("/notes/new-category");
+      return res.redirect(302, "/notes/new-category");
     }
 
     return res.status(e.status || 500).json({ error: e.message });
@@ -168,7 +168,8 @@ export async function remove(req, res) {
 
     if (isForm) {
       req.flash("error_msg", e.message);
-      return res.redirect("/notes/new-category");
+      return res.redirect(302, "/notes/new-category");
+      // res.redirect(302, "/notes/all-notes");
     }
 
     return res.status(e.status || 500).json({ error: e.message });
