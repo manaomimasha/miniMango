@@ -1,30 +1,66 @@
-<h2 class="text-info mb-3">New category</h2>
+<h2 class="text-info mb-3">{{#if editMode}}Edit category{{else}}New category{{/if}}</h2>
 
-<form action="/notes/new-category" method="POST" class="mb-4">
+<form action="{{#if editMode}}/notes/new-category/{{category._id}}?_method=PUT{{else}}/notes/new-category{{/if}}" method="POST" class="mb-4">
   <div class="mb-3">
     <label class="form-label text-light">Name</label>
     <input
       name="name"
       class="form-control"
       placeholder="ideas, familia, proyectos"
+      value="{{#if editMode}}{{category.name}}{{/if}}"
       required
     />
   </div>
   <div class="mb-3">
     <label class="form-label text-light">Description</label>
-    <input name="description" class="form-control" placeholder="optional" />
+    <input 
+      name="description" 
+      class="form-control" 
+      placeholder="optional"
+      value="{{#if editMode}}{{category.description}}{{/if}}"
+    />
   </div>
-  <button class="btn btn-info">Save</button>
-  <a href="/notes/all-notes" class="btn btn-outline-light ms-2">Return</a>
+  <button class="btn btn-info">{{#if editMode}}Update{{else}}Save{{/if}}</button>
+  <a href="/notes/new-category" class="btn btn-outline-light ms-2">{{#if editMode}}Cancel{{else}}Return{{/if}}</a>
 </form>
 
 {{#if categories}}
   <h6 class="text-muted">Your categories:</h6>
-  <ul class="list-unstyled">
+  <div class="list-group">
     {{#each categories}}
-      <li class="text-light">• {{this.name}}</li>
+      <div class="list-group-item bg-transparent border-secondary text-light d-flex justify-content-between align-items-center">
+        <div>
+          <strong>{{this.name}}</strong>
+          {{#if this.description}}
+            <small class="text-muted d-block">{{this.description}}</small>
+          {{/if}}
+        </div>
+        <div>
+          <a 
+            href="/api/categories/{{this._id}}" 
+            class="btn btn-sm btn-info me-2"
+            title="Edit category"
+          >
+            <i class="fas fa-edit"></i> Edit
+          </a>
+          <form 
+            action="/notes/delete-category/{{this._id}}?_method=DELETE" 
+            method="POST" 
+            class="d-inline"
+            onsubmit="return confirm('¿Estás seguro de eliminar esta categoría?')"
+          >
+            <button 
+              type="submit" 
+              class="btn btn-sm btn-danger"
+              title="Delete category"
+            >
+              <i class="fas fa-trash"></i> Delete
+            </button>
+          </form>
+        </div>
+      </div>
     {{/each}}
-  </ul>
+  </div>
 {{else}}
   <p class="text-muted">No category yet.</p>
 {{/if}}

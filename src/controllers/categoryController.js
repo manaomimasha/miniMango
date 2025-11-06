@@ -4,6 +4,7 @@ import {
   listCategoriesService,
   updateCategoryService,
   deleteCategoryService,
+  getCategoryService,
 } from "../services/categoryService.js";
 
 // GET: formulario + listado (opcional)
@@ -13,6 +14,45 @@ export async function list(req, res) {
     res.render("notes/new-category", { categories }); // ← pasar categories a la vista
   } catch (e) {
     res.status(e.status || 500).json({ error: e.message });
+  }
+}
+
+// GET: obtener una categoría por ID
+// export async function getById(req, res) {
+//   try {
+//     const category = await getCategoryService(req.user.id, req.params.id);
+
+//     const isForm = req.headers["accept"]?.includes("text/html");
+
+//     if (isForm) {
+//       return res.render("notes/new-category", { category, editMode: true });
+//     }
+
+//     return res.status(200).json({ ok: true, data: category });
+//   } catch (e) {
+//     return res.status(e.status || 500).json({ error: e.message });
+//   }
+// }
+
+// GET: obtener una categoría por ID
+export async function getById(req, res) {
+  try {
+    const category = await getCategoryService(req.user.id, req.params.id);
+    const categories = await listCategoriesService(req.user.id);
+    
+    const isForm = req.headers["accept"]?.includes("text/html");
+    
+    if (isForm) {
+      return res.render("notes/new-category", { 
+        category, 
+        categories,
+        editMode: true 
+      });
+    }
+    
+    return res.status(200).json({ ok: true, data: category });
+  } catch (e) {
+    return res.status(e.status || 500).json({ error: e.message });
   }
 }
 
@@ -60,27 +100,77 @@ export async function create(req, res) {
     return res.status(e.status || 500).json({ error: e.message });
   }
 }
+// ... existing code ...
 
-// PUT: actualizar y redirigir (si querés mismo comportamiento)
+// PUT: actualizar categoría
 export async function update(req, res) {
   try {
-    await updateCategoryService(req.user.id, req.params.id, req.body);
-    req.flash("success_msg", "Categoría actualizada");
-    res.redirect("/notes/all-notes");
+    const category = await updateCategoryService(
+      req.user.id,
+      req.params.id,
+      req.body
+    );
+
+    // Detectar si el request vino de un formulario HTML
+    const isForm = req.headers["content-type"]?.includes(
+      "application/x-www-form-urlencoded"
+    );
+
+    if (isForm) {
+      req.flash("success_msg", "Categoría actualizada");
+      return res.redirect("/notes/all-notes");
+    }
+
+    // Si vino desde Postman o fetch → devuelve JSON
+    return res.status(200).json({
+      ok: true,
+      message: "Categoría actualizada correctamente",
+      data: category,
+    });
   } catch (e) {
-    req.flash("error_msg", e.message);
-    res.redirect("/notes/new-category");
+    const isForm = req.headers["content-type"]?.includes(
+      "application/x-www-form-urlencoded"
+    );
+
+    if (isForm) {
+      req.flash("error_msg", e.message);
+      return res.redirect("/notes/new-category");
+    }
+
+    return res.status(e.status || 500).json({ error: e.message });
   }
 }
 
-// DELETE: eliminar y redirigir
+// DELETE: eliminar categoría
 export async function remove(req, res) {
   try {
     await deleteCategoryService(req.user.id, req.params.id);
-    req.flash("success_msg", "Categoría eliminada");
-    res.redirect("/notes/new-category");
+
+    // Detectar si el request vino de un formulario HTML
+    const isForm = req.headers["content-type"]?.includes(
+      "application/x-www-form-urlencoded"
+    );
+
+    if (isForm) {
+      req.flash("success_msg", "Categoría eliminada");
+      return res.redirect("/notes/new-category");
+    }
+
+    // Si vino desde Postman o fetch → devuelve JSON
+    return res.status(200).json({
+      ok: true,
+      message: "Categoría eliminada correctamente",
+    });
   } catch (e) {
-    req.flash("error_msg", e.message);
-    res.redirect("/notes/new-category");
+    const isForm = req.headers["content-type"]?.includes(
+      "application/x-www-form-urlencoded"
+    );
+
+    if (isForm) {
+      req.flash("error_msg", e.message);
+      return res.redirect("/notes/new-category");
+    }
+
+    return res.status(e.status || 500).json({ error: e.message });
   }
 }
